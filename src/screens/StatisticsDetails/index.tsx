@@ -1,14 +1,22 @@
 import { PercentageRecipeHeader } from '@components/PercentageRecipeHeader';
-import { Container, BackIcon, Icon, StatisticsContainer, Title, HorizontalContainer } from './styles';
 import { View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
+import { Container, BackIcon, Icon, StatisticsContainer, Title, HorizontalContainer } from './styles';
 import imgBackButton from '@assets/arrow_left.png';
 import { GeneralStatistics } from '@components/GeneralStatistics';
 
 export function StatisticsDetails() {
+
+    const navigation = useNavigation();
+
+    function handleGoBack() {
+        navigation.navigate('home');
+    }
+
     return (
         <Container>
-            <BackIcon>
+            <BackIcon onPress={handleGoBack}>
                 <Icon source={imgBackButton} />
             </BackIcon>
             <PercentageRecipeHeader />

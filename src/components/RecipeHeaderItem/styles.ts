@@ -2,7 +2,6 @@ import styled, { css } from "styled-components/native";
 
 export const Container = styled.View`
     margin-top: 32px;
-    background-color: ${({ theme }) => theme.COLORS.WHITE};
 `;
 
 export const Title = styled.Text`

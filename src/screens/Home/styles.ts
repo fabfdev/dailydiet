@@ -4,6 +4,7 @@ import styled, { css } from "styled-components/native";
 export const Container = styled(SafeAreaView)`
     width: 100%;
     padding: 0px 24px;
+    background-color: ${({ theme }) => theme.COLORS.GRAY_7 };
 `;
 
 export const Header = styled.View`

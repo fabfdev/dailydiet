@@ -35,4 +35,5 @@ export const Body = styled.Text`
         font-family: ${theme.FONT_FAMILY.REGULAR};
         color: ${theme.COLORS.GRAY_2};
     `}
+    text-align: center;
 `;

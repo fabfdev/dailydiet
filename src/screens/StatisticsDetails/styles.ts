@@ -1,5 +1,6 @@
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styled, { css } from "styled-components/native";
+import { Image } from 'react-native';
 
 export const Container = styled(SafeAreaView)`
     flex: 1;
@@ -11,14 +12,16 @@ export const BackIcon = styled.TouchableOpacity`
     margin-left: 24px;
 `;
 
-export const Icon = styled.Image`
+export const Icon = styled(Image).attrs(({ theme }) => ({
+    tintColor: theme.COLORS.GREEN_DARK
+}))`
     width: 24px;
     height: 24px;
 `;
 
 export const StatisticsContainer = styled.View`
     flex: 1;
-    background: ${({ theme }) => theme.COLORS.WHITE};
+    background-color: ${({ theme }) => theme.COLORS.GRAY_7 };
     border-radius: 20px;
     margin-top: 32px;
     padding: 32px 24px;

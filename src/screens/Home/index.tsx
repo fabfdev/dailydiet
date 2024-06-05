@@ -1,5 +1,6 @@
 import { Container, Header, Logo, Profile, Snack } from './styles';
-import { SectionList } from 'react-native';
+import { SectionList, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import imgLogo from '@assets/logo.png';
 import imgProfile from '@assets/ellipse.png';
@@ -12,6 +13,8 @@ import { RecipeItem } from '@components/RecipeItem';
 
 export function Home() {
 
+    const navigation = useNavigation();
+
     const data = [
         {
             title: '12.08.24',
@@ -22,6 +25,10 @@ export function Home() {
             data: ['a', 'b', 'c', 'd', 'e', 'f', 'g']
         }
     ]
+
+    function handleOpenStatisticsDetails() {
+        navigation.navigate('statisticsDetails');
+    }
 
     return (
         <Container>
@@ -35,14 +42,14 @@ export function Home() {
                     <RecipeHeaderItem/>
                 )}
                 ListHeaderComponent={() => (
-                    <>
+                    <View>
                         <Header>
                             <Logo source={imgLogo} />
                             <Spacer />
                             <Profile source={imgProfile} />
                         </Header>
 
-                        <PercentageRecipe />
+                        <PercentageRecipe onPress={handleOpenStatisticsDetails}/>
 
                         <Snack>
                             Refeições
@@ -52,10 +59,12 @@ export function Home() {
                             title='Nova refeição'
                             icon={ButtonIcon.add}
                         />
-                    </>
+                    </View>
                 )}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ paddingBottom: 100 }}
+                stickySectionHeadersEnabled={false}
+                ListHeaderComponentStyle={{ paddingTop: 16 }}
             />
         </Container>
     )

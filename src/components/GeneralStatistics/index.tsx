@@ -11,7 +11,7 @@ export function GeneralStatistics({ type = 'TERTIARY' }: Props) {
                 4
             </Title>
             <Body>
-                melhor sequencia de pratos dentro da dieta
+                refeições dentro da dieta
             </Body>
         </Container>
     )
