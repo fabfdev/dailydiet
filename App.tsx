@@ -6,6 +6,7 @@ import theme from './src/theme';
 
 import { Loading } from '@components/Loading';
 import { Home } from '@screens/Home';
+import { StatisticsDetails } from '@screens/StatisticsDetails';
 
 export default function App() {
 
@@ -16,8 +17,9 @@ export default function App() {
       <StatusBar
         barStyle="dark-content"
         backgroundColor={'transparent'}
+        translucent
       />
-      { fontsLoaded ? <Home /> : <Loading /> }
+      { fontsLoaded ? <StatisticsDetails /> : <Loading /> }
     </ThemeProvider>
   );
 }
