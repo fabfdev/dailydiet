@@ -1,5 +1,5 @@
 import { PercentageRecipeHeader } from '@components/PercentageRecipeHeader';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { Container, BackIcon, Icon, StatisticsContainer, Title, HorizontalContainer } from './styles';
@@ -15,7 +15,7 @@ export function StatisticsDetails() {
     }
 
     return (
-        <Container>
+        <Container edges={Platform.OS === 'ios' ? ["top", "right", "left"] : ["top", "right", "bottom", "left"]}>
             <BackIcon onPress={handleGoBack}>
                 <Icon source={imgBackButton} />
             </BackIcon>

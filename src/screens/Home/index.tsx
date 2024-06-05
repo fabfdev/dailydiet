@@ -18,16 +18,20 @@ export function Home() {
     const data = [
         {
             title: '12.08.24',
-            data: ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+            data: ['a', 'b', 'c', 'd']
         },
         {
             title: '13.08.24',
-            data: ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+            data: ['h', 'i']
         }
     ]
 
     function handleOpenStatisticsDetails() {
         navigation.navigate('statisticsDetails');
+    }
+
+    function handleOpenCreateMeal() {
+        navigation.navigate('meal');
     }
 
     return (
@@ -58,6 +62,7 @@ export function Home() {
                         <Button
                             title='Nova refeição'
                             icon={ButtonIcon.add}
+                            onPress={handleOpenCreateMeal}
                         />
                     </View>
                 )}

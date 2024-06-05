@@ -5,18 +5,12 @@ import { Image } from 'react-native';
 export const Container = styled(SafeAreaView)`
     flex: 1;
     background: ${({ theme }) => theme.COLORS.GREEN_LIGHT};
+    padding-top: 8px;
 `;
 
 export const BackIcon = styled.TouchableOpacity`
     border-radius: 20px;
     margin-left: 24px;
-`;
-
-export const Icon = styled(Image).attrs(({ theme }) => ({
-    tintColor: theme.COLORS.GREEN_DARK
-}))`
-    width: 24px;
-    height: 24px;
 `;
 
 export const StatisticsContainer = styled.View`
@@ -39,4 +33,11 @@ export const Title = styled.Text`
 
 export const HorizontalContainer = styled.View`
     flex-direction: row;
+`;
+
+export const Icon = styled(Image).attrs(({ theme }) => ({
+    tintColor: theme.COLORS.GREEN_DARK
+}))`
+    width: 24px;
+    height: 24px;
 `;
