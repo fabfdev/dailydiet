@@ -1,10 +1,10 @@
 import styled from "styled-components/native";
 import { TouchableOpacity, Image } from 'react-native';
 
-export type PercentageReceipeTypeStypeProps = 'PRIMARY' | 'SECONDARY'
+export type PercentageRecipeTypeStypeProps = 'PRIMARY' | 'SECONDARY'
 
 type Props = {
-    type: PercentageReceipeTypeStypeProps;
+    type: PercentageRecipeTypeStypeProps;
 }
 
 export const Container = styled(TouchableOpacity)<Props>`

@@ -1,6 +1,6 @@
 import { Body, Container, Header } from "./styles";
 
-export function PercentageReceiptHeader() {
+export function PercentageRecipeHeader() {
     return (
         <Container>
             <Header>
