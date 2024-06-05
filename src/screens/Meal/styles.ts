@@ -52,7 +52,7 @@ export const VerticalSpacer = styled.View`
     margin-top: 16px;
 `;
 
-export const DateTimeContainer = styled.View`
+export const HorizontalContainer = styled.View`
     flex-direction: row;
     margin: 0 16px;
 `;

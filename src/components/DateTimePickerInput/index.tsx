@@ -1,4 +1,6 @@
-import { Container, Title, ContainerInput } from "./styles";
+import { Container, ContainerInput } from "./styles";
+
+import { InputTitle } from "@components/InputTitle";
 
 type Props = {
     title: string;
@@ -7,9 +9,7 @@ type Props = {
 export function DateTimePicker({ title }: Props) {
     return (
         <Container>
-            <Title>
-                {title}
-            </Title>
+            <InputTitle title={title} />
 
             <ContainerInput>
 

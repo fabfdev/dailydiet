@@ -1,5 +1,5 @@
 import { TextInput } from 'react-native';
-import styled, { css } from "styled-components/native";
+import styled from "styled-components/native";
 
 export type InputTypeStyleProps = boolean;
 
@@ -9,14 +9,6 @@ type Props = {
 
 export const Container = styled.View`
     padding: 0 24px;
-`;
-
-export const Title = styled.Text`
-    ${({ theme }) => css`
-        font-family: ${theme.FONT_FAMILY.BOLD};
-        font-size: ${theme.FONT_SIZE.SM}px;
-        color: ${theme.COLORS.GRAY_2};
-    `};
 `;
 
 export const ContainerInput = styled(TextInput)<Props>`

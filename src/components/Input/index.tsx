@@ -1,4 +1,6 @@
-import { Container, Title, ContainerInput, InputTypeStyleProps } from './styles';
+import { Container, ContainerInput, InputTypeStyleProps } from './styles';
+
+import { InputTitle } from '@components/InputTitle';
 
 type Props = {
     title: string;
@@ -8,9 +10,7 @@ type Props = {
 export function Input({ title, multine = false }: Props) {
     return (
         <Container>
-            <Title>
-                {title}
-            </Title>
+            <InputTitle title={title}/>
             <ContainerInput type={multine} multiline={multine}/>
         </Container>
     )

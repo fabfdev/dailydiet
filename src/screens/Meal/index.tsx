@@ -1,11 +1,13 @@
 import { Platform, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { BackIcon, Container, ContentContainer, DateTimeContainer, Header, Icon, Toolbar, VerticalSpacer } from './styles';
+import { BackIcon, Container, ContentContainer, HorizontalContainer, Header, Icon, Toolbar, VerticalSpacer } from './styles';
 import imgBack from '@assets/arrow_left.png';
 import { Input } from '@components/Input';
 import { Button } from '@components/Button';
 import { DateTimePicker } from '@components/DateTimePickerInput';
+import { InDiet } from '@components/InDiet';
+import { InputTitle } from '@components/InputTitle';
 
 export function Meal() {
 
@@ -32,10 +34,16 @@ export function Meal() {
                 <Input title='Descrição' multine={true}/>
                 <VerticalSpacer />
 
-                <DateTimeContainer>
+                <HorizontalContainer>
                     <DateTimePicker title='Data' />
                     <DateTimePicker title='Hora' />
-                </DateTimeContainer>
+                </HorizontalContainer>
+
+                <InputTitle title='Está dentro da dieta?' style={{ marginStart: 24, marginTop: 16, marginBottom: 2 }}/>
+                <HorizontalContainer>
+                    <InDiet title='Sim' buttonStyle='PRIMARY'/>
+                    <InDiet title='Não' buttonStyle='SECONDARY'/>
+                </HorizontalContainer>
             </ContentContainer>
 
             <Button 
