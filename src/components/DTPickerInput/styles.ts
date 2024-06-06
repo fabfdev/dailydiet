@@ -6,10 +6,14 @@ export const Container = styled.View`
 `;
 
 
-export const ContainerInput = styled.TextInput`
+export const ContainerInput = styled.TouchableOpacity`
     height: 48px;
     border-color: ${({ theme }) => theme.COLORS.GRAY_5};
     border-radius: 6px;
     border-width: 1px;
     padding: 16px;
+`;
+
+export const DTTitle = styled.Text`
+
 `;
