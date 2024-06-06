@@ -16,6 +16,10 @@ export function Meal() {
     const [showTimePicker, setShowTimePicker] = useState(false);
     const navigation = useNavigation();
 
+    function handleNavigateResultMealSaved() {
+        navigation.navigate('resultMealSaved');
+    }
+
     function handleBack() {
         navigation.navigate('home');
     }
@@ -56,6 +60,7 @@ export function Meal() {
             <Button
                 title='Cadastrar refeição'
                 style={{ marginHorizontal: 16 }}
+                onPress={handleNavigateResultMealSaved}
             />
 
             <DateTimePickerModal
