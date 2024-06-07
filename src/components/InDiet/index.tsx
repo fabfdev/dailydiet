@@ -1,14 +1,14 @@
-import { Container, Icon, Title, InDietButtonStyleProps } from './styles';
+import { TouchableOpacityProps } from 'react-native';
+import { Container, Icon, Title, InDietButtonStyleProps, InDietStateButtonStyleProps } from './styles';
 
-type Props = {
+type Props = TouchableOpacityProps & InDietStateButtonStyleProps & {
     title: string;
-    isActive?: boolean;
     buttonStyle?: InDietButtonStyleProps
 }
 
-export function InDiet({ title, isActive = false, buttonStyle = 'DEFAULT' }: Props) {
+export function InDiet({ title, isActive = false, buttonStyle = 'DEFAULT', ...rest }: Props) {
     return (
-        <Container isActive={isActive} buttonStyle={buttonStyle}>
+        <Container isActive={isActive} buttonStyle={buttonStyle} {...rest}>
             <Icon buttonStyle={buttonStyle}/>
             <Title>
                 {title}

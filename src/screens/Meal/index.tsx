@@ -2,18 +2,24 @@ import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
-import { BackIcon, Container, ContentContainer, HorizontalContainer, Header, Icon, Toolbar, VerticalSpacer } from './styles';
-import imgBack from '@assets/arrow_left.png';
+import { Container, ContentContainer, HorizontalContainer, VerticalSpacer } from './styles';
 import { Input } from '@components/Input';
 import { Button } from '@components/Button';
 import { DTPickerInput } from '@components/DTPickerInput';
 import { InDiet } from '@components/InDiet';
 import { InputTitle } from '@components/InputTitle';
+import { Toolbar } from '@components/Toolbar';
+
+enum ButtonInDiet {
+    POSITIVE,
+    NEGATIVE
+}
 
 export function Meal() {
 
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [showTimePicker, setShowTimePicker] = useState(false);
+    const [buttonInDiet, setButtonInDiet] = useState<ButtonInDiet>();
     const navigation = useNavigation();
 
     function handleNavigateResultMealSaved() {
@@ -26,14 +32,11 @@ export function Meal() {
 
     return (
         <Container>
-            <Toolbar>
-                <BackIcon onPress={handleBack}>
-                    <Icon source={imgBack} />
-                </BackIcon>
-                <Header>
-                    Nova refeição
-                </Header>
-            </Toolbar>
+            
+            <Toolbar 
+                title='Nova refeição'
+                handleBack={handleBack}
+            />
 
             <ContentContainer>
                 <Input title='Nome' />
@@ -52,8 +55,18 @@ export function Meal() {
 
                 <InputTitle title='Está dentro da dieta?' style={{ marginStart: 24, marginTop: 16, marginBottom: 2 }} />
                 <HorizontalContainer>
-                    <InDiet title='Sim' buttonStyle='PRIMARY' />
-                    <InDiet title='Não' buttonStyle='SECONDARY' />
+                    <InDiet
+                        title='Sim'
+                        buttonStyle='PRIMARY'
+                        isActive={buttonInDiet === ButtonInDiet.POSITIVE}
+                        onPress={() => setButtonInDiet(ButtonInDiet.POSITIVE)}
+                    />
+                    <InDiet
+                        title='Não'
+                        buttonStyle='SECONDARY'
+                        isActive={buttonInDiet === ButtonInDiet.NEGATIVE}
+                        onPress={() => setButtonInDiet(ButtonInDiet.NEGATIVE)}
+                    />
                 </HorizontalContainer>
             </ContentContainer>
 

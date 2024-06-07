@@ -1,13 +1,18 @@
+import { TouchableOpacity } from "react-native";
+
 import styled, { css } from "styled-components/native";
 
 export type InDietButtonStyleProps = 'PRIMARY' | 'SECONDARY' | 'DEFAULT';
 
-type Props = {
+export type InDietStateButtonStyleProps = {
     isActive?: boolean;
+}
+
+type Props = InDietStateButtonStyleProps & {
     buttonStyle: InDietButtonStyleProps;
 }
 
-export const Container = styled.View<Props>`
+export const Container = styled(TouchableOpacity)<Props>`
     ${({ theme, isActive, buttonStyle }) => isActive && css`
         border-width: 1px;
         border-color: ${buttonStyle === "PRIMARY" ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK};

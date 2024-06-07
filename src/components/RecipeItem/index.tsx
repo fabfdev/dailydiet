@@ -1,12 +1,13 @@
+import { TouchableOpacityProps } from 'react-native';
 import { Container, Time, Spacer, Title, Indicator, RecipeIndicatorTypeStyleProps } from './styles';
 
-type Props = {
+type Props = TouchableOpacityProps & {
     indicatorType?: RecipeIndicatorTypeStyleProps;
 }
 
-export function RecipeItem({ indicatorType = 'PRIMARY' }: Props) {
+export function RecipeItem({ indicatorType = 'PRIMARY', ...rest }: Props) {
     return (
-        <Container>
+        <Container {...rest}>
             <Time>
                 20:00
             </Time>

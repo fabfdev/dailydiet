@@ -34,13 +34,17 @@ export function Home() {
         navigation.navigate('meal');
     }
 
+    function handleMealDetails() {
+        navigation.navigate('mealDetails');
+    }
+
     return (
         <Container>
             <SectionList
                 sections={data}
                 keyExtractor={(item, index) => item + index}
                 renderItem={({ item }) => (
-                    <RecipeItem />
+                    <RecipeItem onPress={handleMealDetails}/>
                 )}
                 renderSectionHeader={({ section: { title } }) => (
                     <RecipeHeaderItem/>
