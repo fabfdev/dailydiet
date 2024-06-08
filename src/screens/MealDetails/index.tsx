@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { Toolbar } from '@components/Toolbar';
 import { Body, Container, ContentContainer, DateTime, Title, HorizontalSpacer, DietStatusContainer, DietStatusIcon, DietStatusTitle } from './styles';
@@ -6,17 +6,24 @@ import { InputTitle } from '@components/InputTitle';
 import { Button, ButtonIcon } from '@components/Button';
 import { OutlinedButton, OutlinedButtonIcon } from '@components/OutlinedButton';
 import { Spacer } from '@components/Spacer';
+import { DietStorageDTO } from '@storage/diets/DietStorateDTO';
+
+type RouteParams = {
+    diet: DietStorageDTO;
+}
 
 export function MealDetails() {
 
     const navigation = useNavigation();
+    const route = useRoute();
+    const { diet } = route.params as RouteParams;
 
     function handleBack() {
         navigation.navigate('home');
     }
 
     return (
-        <Container>
+        <Container type={diet.status ? 'PRIMARY' : 'SECONDARY'}>
             <Toolbar
                 title='Refeição'
                 handleBack={handleBack}
@@ -24,23 +31,23 @@ export function MealDetails() {
 
             <ContentContainer>
                 <Title>
-                    Sanduíche
+                    {diet.name}
                 </Title>
                 <Body>
-                    Sanduíche de pão integral com atum e salada de alface e tomate
+                    {diet.description}
                 </Body>
 
                 <InputTitle
                     title='Data e hora'
                 />
                 <DateTime>
-                    12/08/2024 às 16:00
+                    {new Date(diet.date).toLocaleDateString()} às {new Date(diet.time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                 </DateTime>
 
                 <DietStatusContainer>
-                    <DietStatusIcon />
+                    <DietStatusIcon type={diet.status ? 'PRIMARY' : 'SECONDARY'} />
                     <DietStatusTitle>
-                        dentro da dieta
+                        {diet.status ? 'dentro da dieta' : 'fora da dieta'}
                     </DietStatusTitle>
                 </DietStatusContainer>
 

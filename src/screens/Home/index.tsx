@@ -34,20 +34,21 @@ export function Home() {
         navigation.navigate('meal');
     }
 
-    function handleMealDetails() {
-        navigation.navigate('mealDetails');
+    function handleMealDetails(diet: DietStorageDTO) {
+        navigation.navigate('mealDetails', { diet: diet });
     }
 
     function groupData(data: DietStorageDTO[]) {
         return data.reduce((result: GroupedDiets[], item: DietStorageDTO) => {
-            const index = result.findIndex(group => group.title === item.date);
+            const date = new Date(item.date).toLocaleDateString();
+            const index = result.findIndex(group => group.title === date);
             if (!result[index]) {
                 result.push({
-                    title: item.date,
+                    title: date,
                     data: []
                 })
             }
-            result.find(group => group.title === item.date)?.data.push(item);
+            result.find(group => group.title === date)?.data.push(item);
             return result;
         }, []);
     }
@@ -69,11 +70,11 @@ export function Home() {
         <Container>
             <SectionList
                 sections={diets}
-                keyExtractor={(item, index) => item.date + index}
+                keyExtractor={(item, index) => item.name + index}
                 renderItem={({ item }) => (
                     <RecipeItem 
                         data={item}
-                        onPress={handleMealDetails}
+                        onPress={() => handleMealDetails(item)}
                     />
                 )}
                 renderSectionHeader={({ section: { title } }) => (

@@ -11,7 +11,7 @@ export function RecipeItem({ data, ...rest }: Props) {
     return (
         <Container {...rest}>
             <Time>
-                {data.time}
+                {new Date(data.time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
             </Time>
             <Spacer />
             <Title >

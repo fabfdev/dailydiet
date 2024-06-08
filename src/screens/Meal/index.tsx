@@ -25,8 +25,8 @@ export function Meal() {
     const mealDescriptionRef = useRef<TextInput>(null);
     const [mealDescription, setMealDescription] = useState('')
 
-    const [date, setDate] = useState('')
-    const [time, setTime] = useState('')
+    const [date, setDate] = useState<Date>()
+    const [time, setTime] = useState<Date>()
 
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [showTimePicker, setShowTimePicker] = useState(false);
@@ -42,7 +42,7 @@ export function Meal() {
     }
 
     async function handleSavelMeal() {
-        if (mealName.trim().length === 0 || mealDescription.trim().length === 0 || date.trim().length === 0 || time.trim().length === 0 || buttonInDiet === undefined) {
+        if (mealName.trim().length === 0 || mealDescription.trim().length === 0 || date === undefined || time === undefined || buttonInDiet === undefined) {
             console.log('campos não preenchidos')
             return;
         }
@@ -87,10 +87,10 @@ export function Meal() {
                 <VerticalSpacer />
 
                 <HorizontalContainer>
-                    <DTPickerInput title='Data' value={date} onPress={() => {
+                    <DTPickerInput title='Data' value={date?.toLocaleDateString()} onPress={() => {
                         setShowDatePicker(true)
                     }} />
-                    <DTPickerInput title='Hora' value={time} onPress={() => {
+                    <DTPickerInput title='Hora' value={time?.toLocaleTimeString()} onPress={() => {
                         setShowTimePicker(true)
                     }} />
                 </HorizontalContainer>
@@ -122,7 +122,7 @@ export function Meal() {
                 isVisible={showDatePicker}
                 mode='date'
                 onConfirm={(date) => {
-                    setDate(date.toLocaleDateString());
+                    setDate(date);
                     setShowDatePicker(false);
                 }}
                 onCancel={() => {
@@ -134,7 +134,7 @@ export function Meal() {
                 isVisible={showTimePicker}
                 mode='time'
                 onConfirm={(date) => {
-                    setTime(date.toLocaleTimeString());
+                    setTime(date);
                     setShowTimePicker(false);
                 }}
                 onCancel={() => {

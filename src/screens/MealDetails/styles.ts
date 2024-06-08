@@ -1,8 +1,14 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled, { css } from "styled-components/native";
 
-export const Container = styled(SafeAreaView)`
-    background: ${({ theme }) => theme.COLORS.GREEN_LIGHT};
+export type DietStatusStyleTypeProps = 'PRIMARY' | 'SECONDARY';
+
+type Props = {
+    type: DietStatusStyleTypeProps;
+}
+
+export const Container = styled(SafeAreaView)<Props>`
+    background-color: ${({ theme, type }) => type === 'PRIMARY' ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
     flex: 1;
 `;
 
@@ -54,11 +60,11 @@ export const DietStatusContainer = styled.View`
     margin-top: 16px;
 `;
 
-export const DietStatusIcon = styled.View`
+export const DietStatusIcon = styled.View<Props>`
     height: 8px;
     width: 8px;
     border-radius: 4px;
-    background-color: ${({ theme }) => theme.COLORS.GREEN_DARK};
+    background-color: ${({ theme, type }) => type === 'PRIMARY' ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK};
 `;
 
 export const DietStatusTitle = styled.Text`
