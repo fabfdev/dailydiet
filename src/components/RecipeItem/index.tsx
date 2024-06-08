@@ -1,21 +1,23 @@
 import { TouchableOpacityProps } from 'react-native';
-import { Container, Time, Spacer, Title, Indicator, RecipeIndicatorTypeStyleProps } from './styles';
+import { Container, Time, Spacer, Title, Indicator } from './styles';
+
+import { DietStorageDTO } from '@storage/diets/DietStorateDTO';
 
 type Props = TouchableOpacityProps & {
-    indicatorType?: RecipeIndicatorTypeStyleProps;
+    data: DietStorageDTO;
 }
 
-export function RecipeItem({ indicatorType = 'PRIMARY', ...rest }: Props) {
+export function RecipeItem({ data, ...rest }: Props) {
     return (
         <Container {...rest}>
             <Time>
-                20:00
+                {data.time}
             </Time>
             <Spacer />
             <Title >
-                Salada cesar com frango
+                {data.name}
             </Title>
-            <Indicator type={indicatorType}/>
+            <Indicator type={data.status ? 'PRIMARY' : 'SECONDARY'}/>
         </Container>
     )
 }

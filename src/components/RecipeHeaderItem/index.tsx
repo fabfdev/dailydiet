@@ -1,10 +1,14 @@
 import { Container, Title } from './styles';
 
-export function RecipeHeaderItem() {
+type Props = {
+    title: string;
+}
+
+export function RecipeHeaderItem({ title }: Props) {
     return (
         <Container>
             <Title>
-                12.08.24
+                {title}
             </Title>
         </Container>
     )

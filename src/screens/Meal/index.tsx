@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
@@ -9,7 +10,7 @@ import { DTPickerInput } from '@components/DTPickerInput';
 import { InDiet } from '@components/InDiet';
 import { InputTitle } from '@components/InputTitle';
 import { Toolbar } from '@components/Toolbar';
-import { TextInput } from 'react-native';
+import { dietAddByDate } from '@storage/diets/dietAddByDate';
 
 enum ButtonInDiet {
     POSITIVE,
@@ -40,12 +41,26 @@ export function Meal() {
         navigation.navigate('home');
     }
 
-    function handleSavelMeal() {
+    async function handleSavelMeal() {
         if (mealName.trim().length === 0 || mealDescription.trim().length === 0 || date.trim().length === 0 || time.trim().length === 0 || buttonInDiet === undefined) {
             console.log('campos não preenchidos')
             return;
         }
-        console.log('campos preenchidos')
+
+        const newDiet = {
+            name: mealName,
+            description: mealDescription,
+            date: date,
+            time: time,
+            status: buttonInDiet === ButtonInDiet.POSITIVE
+        }
+
+        try {
+            await dietAddByDate(newDiet);
+            handleNavigateResultMealSaved();
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
