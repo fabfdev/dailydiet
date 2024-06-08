@@ -37,9 +37,35 @@ export const DateTime = styled.Text`
         color: ${theme.COLORS.GRAY_2};
     `};
     margin-top: 4px;
-    flex: 1;
 `;
 
 export const HorizontalSpacer = styled.View`
     min-height: 8px;
+`;
+
+export const DietStatusContainer = styled.View`
+    background-color: ${({ theme }) => theme.COLORS.GRAY_6};
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-self: baseline;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-top: 16px;
+`;
+
+export const DietStatusIcon = styled.View`
+    height: 8px;
+    width: 8px;
+    border-radius: 4px;
+    background-color: ${({ theme }) => theme.COLORS.GREEN_DARK};
+`;
+
+export const DietStatusTitle = styled.Text`
+    ${({ theme }) => css`
+        font-family: ${theme.FONT_FAMILY.REGULAR};
+        font-size: ${theme.FONT_SIZE.SM}px;
+        color: ${theme.COLORS.GRAY_1};
+    `};
+    margin-left: 6px;
 `;

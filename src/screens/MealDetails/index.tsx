@@ -1,10 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
 
 import { Toolbar } from '@components/Toolbar';
-import { Body, Container, ContentContainer, DateTime, Title, HorizontalSpacer } from './styles';
+import { Body, Container, ContentContainer, DateTime, Title, HorizontalSpacer, DietStatusContainer, DietStatusIcon, DietStatusTitle } from './styles';
 import { InputTitle } from '@components/InputTitle';
 import { Button, ButtonIcon } from '@components/Button';
 import { OutlinedButton, OutlinedButtonIcon } from '@components/OutlinedButton';
+import { Spacer } from '@components/Spacer';
 
 export function MealDetails() {
 
@@ -16,7 +17,7 @@ export function MealDetails() {
 
     return (
         <Container>
-            <Toolbar 
+            <Toolbar
                 title='Refeição'
                 handleBack={handleBack}
             />
@@ -29,12 +30,21 @@ export function MealDetails() {
                     Sanduíche de pão integral com atum e salada de alface e tomate
                 </Body>
 
-                <InputTitle 
+                <InputTitle
                     title='Data e hora'
                 />
                 <DateTime>
                     12/08/2024 às 16:00
                 </DateTime>
+
+                <DietStatusContainer>
+                    <DietStatusIcon />
+                    <DietStatusTitle>
+                        dentro da dieta
+                    </DietStatusTitle>
+                </DietStatusContainer>
+
+                <Spacer />
 
                 <Button
                     title='Editar refeição'
