@@ -1,12 +1,15 @@
+import { Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
-import { Toolbar } from '@components/Toolbar';
 import { Body, Container, ContentContainer, DateTime, Title, HorizontalSpacer, DietStatusContainer, DietStatusIcon, DietStatusTitle } from './styles';
+
+import { Toolbar } from '@components/Toolbar';
 import { InputTitle } from '@components/InputTitle';
 import { Button, ButtonIcon } from '@components/Button';
 import { OutlinedButton, OutlinedButtonIcon } from '@components/OutlinedButton';
 import { Spacer } from '@components/Spacer';
 import { DietStorageDTO } from '@storage/diets/DietStorateDTO';
+import { dietRemove } from '@storage/diets/dietRemove';
 
 type RouteParams = {
     diet: DietStorageDTO;
@@ -20,6 +23,33 @@ export function MealDetails() {
 
     function handleBack() {
         navigation.navigate('home');
+    }
+
+    async function removeDiet() {
+        try {
+            await dietRemove(diet)
+            handleBack();
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    function handleDeleteMeal() {
+        Alert.alert(
+            'Excluir refeição',
+            'Deseja realmente excluir o registro da refeição?',
+            [
+                {
+                    text: 'Cancelar',
+                    style: 'cancel'
+                },
+                {
+                    text: 'Excluir',
+                    style: 'destructive',
+                    onPress: () => { removeDiet(); }
+                }
+            ]
+        )
     }
 
     return (
@@ -61,6 +91,7 @@ export function MealDetails() {
                 <OutlinedButton
                     title='Excluir refeição'
                     icon={OutlinedButtonIcon.delete}
+                    onPress={handleDeleteMeal}
                 />
             </ContentContainer>
         </Container>
