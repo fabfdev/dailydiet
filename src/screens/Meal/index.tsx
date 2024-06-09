@@ -34,7 +34,7 @@ export function Meal() {
     const navigation = useNavigation();
 
     function handleNavigateResultMealSaved() {
-        navigation.navigate('resultMealSaved');
+        navigation.navigate('resultMealSaved', { isInDiet: buttonInDiet === ButtonInDiet.POSITIVE });
     }
 
     function handleBack() {

@@ -1,5 +1,9 @@
 import styled, { css } from "styled-components/native";
 
+type Props = {
+    isInDiet: boolean;
+}
+
 export const Container = styled.View`
     justify-content: center;
     align-items: center;
@@ -7,11 +11,11 @@ export const Container = styled.View`
     background-color: ${({ theme }) => theme.COLORS.GRAY_7};
 `;
 
-export const Header = styled.Text`
-    ${({ theme }) => css`
+export const Header = styled.Text<Props>`
+    ${({ theme, isInDiet }) => css`
         font-size: ${theme.FONT_SIZE.XL}px;
         font-family: ${theme.FONT_FAMILY.BOLD};
-        color: ${theme.COLORS.GREEN_DARK};
+        color: ${isInDiet ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK};
     `};
 `;
 
@@ -22,6 +26,7 @@ export const SubTitle = styled.Text`
         color: ${theme.COLORS.GRAY_1};
     `};
     margin-top: 8px;
+    text-align: center;
 `;
 
 export const BoldSubTitle = styled.Text`
