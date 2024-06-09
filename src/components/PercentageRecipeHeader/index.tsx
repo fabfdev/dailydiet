@@ -1,10 +1,14 @@
 import { Body, Container, Header } from "./styles";
 
-export function PercentageRecipeHeader() {
+type Props = {
+    percentage: number;
+}
+
+export function PercentageRecipeHeader({ percentage }: Props) {
     return (
         <Container>
             <Header>
-                90,86%
+                {Number(percentage).toFixed(2)}%
             </Header>
             <Body>
                 das refeições dentro da dieta

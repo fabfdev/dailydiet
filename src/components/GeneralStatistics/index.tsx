@@ -1,17 +1,19 @@
 import { Container, GeneralStatisticsStyleTypeProps, Title, Body } from './styles';
 
 type Props = {
+    dietQtd: number;
+    title: string;
     type?: GeneralStatisticsStyleTypeProps;
 }
 
-export function GeneralStatistics({ type = 'TERTIARY' }: Props) {
+export function GeneralStatistics({ dietQtd, title, type = 'TERTIARY' }: Props) {
     return (
         <Container type={type}>
             <Title>
-                4
+                {dietQtd}
             </Title>
             <Body>
-                refeições dentro da dieta
+                {title}
             </Body>
         </Container>
     )

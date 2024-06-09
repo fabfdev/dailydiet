@@ -14,6 +14,7 @@ import { RecipeItem } from '@components/RecipeItem';
 import { dietGetAll } from '@storage/diets/dietGetAll';
 import { DietStorageDTO } from '@storage/diets/DietStorateDTO';
 import { dietAddByDate } from '@storage/diets/dietAddByDate';
+import { dietGetPercentage } from '@storage/diets/dietGetPercentage';
 
 interface GroupedDiets {
     title: string;
@@ -24,6 +25,7 @@ export function Home() {
 
     const navigation = useNavigation();
 
+    const [percentage, setPercentage] = useState(0);
     const [diets, setDiets] = useState<GroupedDiets[]>([]);
 
     function handleOpenStatisticsDetails() {
@@ -55,6 +57,7 @@ export function Home() {
 
     async function fetchDiets() {
         try {
+            setPercentage(await dietGetPercentage());
             const data = await dietGetAll();
             setDiets(groupData(data));
         } catch (error) {
@@ -88,7 +91,11 @@ export function Home() {
                             <Profile source={imgProfile} />
                         </Header>
 
-                        <PercentageRecipe onPress={handleOpenStatisticsDetails}/>
+                        <PercentageRecipe 
+                            percentage={percentage}
+                            onPress={handleOpenStatisticsDetails}
+                            type={percentage >= 50? 'PRIMARY' : 'SECONDARY'}
+                        />
 
                         <Snack>
                             Refeições
