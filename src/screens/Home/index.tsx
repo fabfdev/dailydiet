@@ -33,7 +33,7 @@ export function Home() {
     }
 
     function handleOpenCreateMeal() {
-        navigation.navigate('meal');
+        navigation.navigate('meal', {});
     }
 
     function handleMealDetails(diet: DietStorageDTO) {
@@ -57,7 +57,8 @@ export function Home() {
 
     async function fetchDiets() {
         try {
-            setPercentage(await dietGetPercentage());
+            const resPercentage = await dietGetPercentage();
+            setPercentage(Number.isNaN(resPercentage) ? 0 : resPercentage);
             const data = await dietGetAll();
             setDiets(groupData(data));
         } catch (error) {

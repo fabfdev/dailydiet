@@ -11,6 +11,7 @@ import { dietGetPercentage } from '@storage/diets/dietGetPercentage';
 import { dietGetAll } from '@storage/diets/dietGetAll';
 import { dietGetInDiet } from '@storage/diets/dietGetInDiet';
 import { dietGetNotInDiet } from '@storage/diets/dietGetNotInDiet';
+import { dietGetInARow } from '@storage/diets/dietGetInARow';
 
 export function StatisticsDetails() {
 
@@ -18,6 +19,7 @@ export function StatisticsDetails() {
 
     const [percentage, setPercentage] = useState(0);
     const [totalDiets, setTotalDiets] = useState(0);
+    const [totalDietsInARow, setTotalDietsInARow] = useState(0);
     const [inDiet, setInDiet] = useState(0);
     const [notInDiet, setNotInDiet] = useState(0);
 
@@ -26,8 +28,10 @@ export function StatisticsDetails() {
     }
 
     async function fetchData() {
-        setPercentage(await dietGetPercentage());
+        const resPercentage = await dietGetPercentage();
+        setPercentage(Number.isNaN(resPercentage) ? 0 : resPercentage);
         setTotalDiets((await dietGetAll()).length);
+        setTotalDietsInARow(await dietGetInARow());
         setInDiet((await dietGetInDiet()).length);
         setNotInDiet((await dietGetNotInDiet()).length);
     }
@@ -47,7 +51,7 @@ export function StatisticsDetails() {
             <PercentageRecipeHeader percentage={percentage}/>
             <StatisticsContainer >
                 <Title>Estatísticas gerais</Title>
-                <GeneralStatistics dietQtd={0} title='melhor sequência de pratos dentro da dieta'/>
+                <GeneralStatistics dietQtd={totalDietsInARow} title='melhor sequência de pratos dentro da dieta'/>
                 <GeneralStatistics dietQtd={totalDiets} title='refeições registradas'/>
                 <HorizontalContainer>
                     <GeneralStatistics dietQtd={inDiet} title='refeições dentro da dieta' type='PRIMARY'/>

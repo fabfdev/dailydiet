@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { TextInput } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 import { Container, ContentContainer, HorizontalContainer, VerticalSpacer } from './styles';
@@ -11,10 +11,18 @@ import { InDiet } from '@components/InDiet';
 import { InputTitle } from '@components/InputTitle';
 import { Toolbar } from '@components/Toolbar';
 import { dietAddByDate } from '@storage/diets/dietAddByDate';
+import { DietStorageDTO } from '@storage/diets/DietStorateDTO';
+import { dietUpdate } from '@storage/diets/dietUpdate';
+import { dietAddInARow } from '@storage/diets/dietAddInARow';
+import { dietRemoveInARow } from '@storage/diets/dietRemoveInARow';
 
 enum ButtonInDiet {
     POSITIVE,
     NEGATIVE
+}
+
+type RouteParams = {
+    diet?: DietStorageDTO;
 }
 
 export function Meal() {
@@ -31,7 +39,10 @@ export function Meal() {
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [showTimePicker, setShowTimePicker] = useState(false);
     const [buttonInDiet, setButtonInDiet] = useState<ButtonInDiet>();
+
     const navigation = useNavigation();
+    const route = useRoute();
+    const { diet } = route.params as RouteParams;
 
     function handleNavigateResultMealSaved() {
         navigation.navigate('resultMealSaved', { isInDiet: buttonInDiet === ButtonInDiet.POSITIVE });
@@ -56,18 +67,33 @@ export function Meal() {
         }
 
         try {
-            await dietAddByDate(newDiet);
+            newDiet.status ? await dietAddInARow() : await dietRemoveInARow();
+            diet ? await dietUpdate(diet, newDiet) : await dietAddByDate(newDiet);
             handleNavigateResultMealSaved();
         } catch (error) {
             console.log(error)
         }
     }
 
+    function fetchData() {
+        if (diet) {
+            setMealName(diet.name);
+            setMealDescription(diet.description);
+            setDate(new Date(diet.date));
+            setTime(new Date(diet.time));
+            setButtonInDiet(diet.status? ButtonInDiet.POSITIVE : ButtonInDiet.NEGATIVE);
+        }
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, [])
+
     return (
         <Container>
 
             <Toolbar
-                title='Nova refeição'
+                title={diet? 'Editar refeição' : 'Nova refeição'}
                 handleBack={handleBack}
             />
 
@@ -76,6 +102,7 @@ export function Meal() {
                     inputRef={mealNameRef}
                     title='Nome'
                     onChangeText={setMealName}
+                    value={mealName}
                 />
                 <VerticalSpacer />
                 <Input
@@ -83,6 +110,7 @@ export function Meal() {
                     title='Descrição'
                     multine={true}
                     onChangeText={setMealDescription}
+                    value={mealDescription}
                 />
                 <VerticalSpacer />
 
@@ -113,7 +141,7 @@ export function Meal() {
             </ContentContainer>
 
             <Button
-                title='Cadastrar refeição'
+                title={diet ? 'Salvar alterações' : 'Cadastrar refeição'}
                 style={{ marginHorizontal: 16 }}
                 onPress={handleSavelMeal}
             />

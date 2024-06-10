@@ -26,6 +26,8 @@ export const SubTitle = styled.Text`
         color: ${theme.COLORS.GRAY_1};
     `};
     margin-top: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
     text-align: center;
 `;
 

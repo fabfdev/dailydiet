@@ -52,6 +52,10 @@ export function MealDetails() {
         )
     }
 
+    function handleEditMeal() {
+        navigation.navigate('meal', { diet: diet });
+    }
+
     return (
         <Container type={diet.status ? 'PRIMARY' : 'SECONDARY'}>
             <Toolbar
@@ -86,6 +90,7 @@ export function MealDetails() {
                 <Button
                     title='Editar refeição'
                     icon={ButtonIcon.edit}
+                    onPress={handleEditMeal}
                 />
                 <HorizontalSpacer />
                 <OutlinedButton

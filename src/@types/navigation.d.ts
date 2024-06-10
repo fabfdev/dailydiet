@@ -3,7 +3,9 @@ export declare global {
         interface RootParamList {
             home: undefined;
             statisticsDetails: undefined;
-            meal: undefined;
+            meal: {
+                diet?: DietStorageDTO;
+            };
             resultMealSaved: {
                 isInDiet: boolean;
             };

@@ -7,7 +7,7 @@ import { dietGetAll } from "./dietGetAll";
 export async function dietRemove(diet: DietStorageDTO) {
     try {
         const stored = await dietGetAll();
-        const filter = stored.filter(item => item.name !== diet.name && item.date !== diet.date)
+        const filter = stored.filter(item => item.name !== diet.name)
         const result = JSON.stringify(filter);
 
         await AsyncStorage.setItem(DIET_COLLECTION, result);
